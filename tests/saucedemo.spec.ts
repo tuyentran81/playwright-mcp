@@ -1,16 +1,11 @@
-import { test, expect } from '@playwright/test';
-import { LoginPage, InventoryPage, CartPage, CheckoutPage } from '../pages/saucedemo';
+import { expect } from '@playwright/test';
+import { test } from '../test-fixture/pom-fixture';
 
 function randomString(length: number) {
   return Math.random().toString(36).substring(2, 2 + length);
 }
 
-test('SauceDemo order flow', async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  const inventoryPage = new InventoryPage(page);
-  const cartPage = new CartPage(page);
-  const checkoutPage = new CheckoutPage(page);
-
+test('SauceDemo order flow', async ({ loginPage, inventoryPage, cartPage, checkoutPage }) => {
   await loginPage.goto();
   await loginPage.login('standard_user', 'secret_sauce');
   await inventoryPage.addBackpackToCart();
